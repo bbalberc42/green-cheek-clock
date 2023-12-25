@@ -1,0 +1,4 @@
+<svg class="background">
+    <image href="Chester_Cropped_02_resized.png" />
+    <text id="myLabel" />
+</svg>
