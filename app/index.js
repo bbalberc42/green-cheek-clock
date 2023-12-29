@@ -1,6 +1,11 @@
 import clock from "clock";
 import * as document from "document";
 import { preferences } from "user-settings";
+import { battery } from "power";
+import { charger } from "power";
+
+const BATTERY_LVL_NORMAL    = 50;
+const BATTERY_LVL_LOW       = 25;
 
 function zeroPad(i) 
 {
@@ -15,7 +20,10 @@ function zeroPad(i)
 clock.granularity = "minutes";
 
 // Get a handle on the <text> element
-const myLabel = document.getElementById("myLabel");
+const myLabel           = document.getElementById("myLabel");
+const batt_icon         = document.getElementById("batt_icon");
+const batt_bar          = document.getElementById("batt_bar");
+const batt_bar_shine    = document.getElementById("batt_bar_shine");
 
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => 
@@ -39,3 +47,42 @@ clock.ontick = (evt) =>
     // Display Time
     myLabel.text = `${hours}:${mins}`;
 }
+
+// Battery Power Bar Handler
+battery.onchange = (charger, evt) => 
+{
+    // Update Battery Bar
+    batt_bar.width = (battery.chargeLevel / 4);
+
+    if (battery.chargeLevel >= BATTERY_LVL_NORMAL)
+    {
+        batt_bar.style.fill = "lightgreen";
+    }
+    else if (battery.chargeLevel < BATTERY_LVL_NORMAL 
+        &&   battery.chargeLevel >= BATTERY_LVL_LOW)
+    {
+        batt_bar.style.fill = "lightsalmon";
+    }
+    else if (battery.chargeLevel < BATTERY_LVL_LOW)
+    {
+        batt_bar.style.fill = "red";
+    }
+}
+
+// charger.onchange = (charger, evt) => 
+// {
+//     if (charger !== undefined && charger.connected)
+//     {
+//         // Hide battery icon
+//         batt_icon.style.visibility      = "hidden";
+//         batt_bar.style.visibility       = "hidden";
+//         batt_bar_shine.style.visibility = "hidden";
+//     }
+//     else
+//     {
+//         // Make battery icon visible again
+//         batt_icon.style.visibility      = "visible";
+//         batt_bar.style.visibility       = "visible";
+//         batt_bar_shine.style.visibility = "visible";
+//     }
+// }

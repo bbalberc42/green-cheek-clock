@@ -1,4 +1,7 @@
 <svg class="background">
     <image href="Chester_Cropped_02_resized.png" />
+    <image href="Battery_Icon_02.png" id="batt_icon" />
     <text id="myLabel" />
+    <rect id="batt_bar" />
+    <rect id="batt_bar_shine" />
 </svg>

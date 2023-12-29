@@ -11,3 +11,26 @@
     y: 50%+30;
     fill: lightgrey;
   }
+
+  #batt_icon {
+    x: 5%;
+    y: 5%;
+    width: 29;
+    height: 12;
+  }
+
+  #batt_bar {
+    x: 5%+1;
+    y: 5%+1;
+    width: 25;
+    height: 10;
+    fill: lightgreen;
+  }
+
+  #batt_bar_shine {
+    x: 5%+1;
+    y: 5%+2;
+    width: 25;
+    height: 3;
+    fill: white;
+  }
