@@ -1,7 +1,9 @@
 <svg class="background">
     <image href="Chester_Cropped_02_resized.png" />
     <image href="Battery_Icon_02.png" id="batt_icon" />
+    <image href="Feet_Icon.png" id="step_icon" />
     <text id="myLabel" />
+    <text id="step_count" />
     <rect id="batt_bar" />
     <rect id="batt_bar_shine" />
 </svg>

@@ -1,11 +1,18 @@
 import clock from "clock";
 import * as document from "document";
+import { me } from "appbit";
 import { preferences } from "user-settings";
+import { today, goals } from "user-activity";
 import { battery } from "power";
 import { charger } from "power";
 
 const BATTERY_LVL_NORMAL    = 50;
 const BATTERY_LVL_LOW       = 25;
+
+if (me.permissions.granted("access_activity")) 
+{
+    console.log(`${today.adjusted.steps} Steps`);
+}
 
 function zeroPad(i) 
 {
@@ -17,10 +24,12 @@ function zeroPad(i)
 }
 
 // Update the clock every minute
-clock.granularity = "minutes";
+clock.granularity = "seconds";
 
 // Get a handle on the <text> element
 const myLabel           = document.getElementById("myLabel");
+const step_icon         = document.getElementById("step_icon");
+const step_count        = document.getElementById("step_count");
 const batt_icon         = document.getElementById("batt_icon");
 const batt_bar          = document.getElementById("batt_bar");
 const batt_bar_shine    = document.getElementById("batt_bar_shine");
@@ -46,6 +55,13 @@ clock.ontick = (evt) =>
 
     // Display Time
     myLabel.text = `${hours}:${mins}`;
+
+    // Update Battery Bar
+    battery.onchange(charger, evt);
+
+    // Update Steps
+    let steps = getSteps();
+    step_count.text = `${steps}`;
 }
 
 // Battery Power Bar Handler
@@ -69,20 +85,10 @@ battery.onchange = (charger, evt) =>
     }
 }
 
-// charger.onchange = (charger, evt) => 
-// {
-//     if (charger !== undefined && charger.connected)
-//     {
-//         // Hide battery icon
-//         batt_icon.style.visibility      = "hidden";
-//         batt_bar.style.visibility       = "hidden";
-//         batt_bar_shine.style.visibility = "hidden";
-//     }
-//     else
-//     {
-//         // Make battery icon visible again
-//         batt_icon.style.visibility      = "visible";
-//         batt_bar.style.visibility       = "visible";
-//         batt_bar_shine.style.visibility = "visible";
-//     }
-// }
+// Get the current Step Count
+function getSteps()
+{
+    let steps = (today.adjusted.steps || 0);
+
+    return steps;
+}

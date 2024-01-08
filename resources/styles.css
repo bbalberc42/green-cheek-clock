@@ -12,6 +12,23 @@
     fill: lightgrey;
   }
 
+  #step_icon {
+    x: 40%;
+    y: 80%+5;
+    width: 20;
+    height: 26;
+  }
+
+  #step_count {
+    x: 50%;
+    y: 90%-3;
+    font-size: 20;
+    font-family: System-Bold;
+    text-length: 40;
+    text-anchor: left;
+    fill: black;
+  }
+
   #batt_icon {
     x: 5%;
     y: 5%;
