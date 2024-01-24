@@ -2,18 +2,24 @@
     viewport-fill: green;
   }
   
-  #myLabel {
+  #clock_time {
     font-size: 60;
     font-family: System-Bold;
     text-length: 32;
     text-anchor: middle;
+    stroke: black;
+    stroke-width: 5;
+    /* border: 3px black; */
+    /* -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-color: black; */
+    /* text-shadow: 2px black; */
     x: 50%;
     y: 50%+30;
     fill: lightgrey;
   }
 
   #step_icon {
-    x: 40%;
+    x: 40%-10;
     y: 80%+5;
     width: 20;
     height: 26;
@@ -22,9 +28,26 @@
   #step_count {
     x: 50%;
     y: 90%-3;
+    font-size: 22;
+    font-family: System-Bold;
+    text-length: 8;
+    text-anchor: left;
+    fill: black;
+  }
+
+  #heart_icon {
+    x: 75%;
+    y: 5%-2;
+    width: 23;
+    height: 22;
+  }
+
+  #heart_rate {
+    x: 85%;
+    y: 10%;
     font-size: 20;
     font-family: System-Bold;
-    text-length: 40;
+    text-length: 8;
     text-anchor: left;
     fill: black;
   }
