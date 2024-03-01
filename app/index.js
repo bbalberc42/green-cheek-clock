@@ -19,9 +19,10 @@ const step_count        = document.getElementById("step_count");
 const batt_icon         = document.getElementById("batt_icon");
 const batt_bar          = document.getElementById("batt_bar");
 const batt_bar_shine    = document.getElementById("batt_bar_shine");
+const batt_percent      = document.getElementById("batt_percent");
 const heart_rate        = document.getElementById("heart_rate");
 
-const hrm               = new HeartRateSensor({ frequency: 1});
+let hrm;
 
 // Check permissions
 if (appbit.permissions.granted("access_activity")) 
@@ -31,6 +32,8 @@ if (appbit.permissions.granted("access_activity"))
 
 if (HeartRateSensor && appbit.permissions.granted("access_heart_rate")) 
 {
+    hrm = new HeartRateSensor({ frequency: 1});
+    
     hrm.addEventListener("reading", () => 
     {
         heart_rate.text = `${hrm.heartRate}`;
@@ -125,6 +128,8 @@ battery.onchange = (charger, evt) =>
     {
         batt_bar.style.fill = "red";
     }
+
+    batt_percent.text = `${battery.chargeLevel}%`;
 }
 
 // Get the current Step Count

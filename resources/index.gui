@@ -6,6 +6,7 @@
     <text id="clock_time" />
     <text id="step_count" />
     <text id="heart_rate" />
+    <text id="batt_percent" />
     <rect id="batt_bar" />
     <rect id="batt_bar_shine" />
 </svg>
