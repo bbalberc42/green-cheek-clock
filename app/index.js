@@ -4,23 +4,18 @@ import { me as appbit } from "appbit";
 import { preferences } from "user-settings";
 import { today, goals } from "user-activity";
 import { battery } from "power";
-import { charger } from "power";
+import { BatteryIcon } from "./battery_icon";
 import { display } from "display";
 import { HeartRateSensor } from "heart-rate";
 import { BodyPresenceSensor } from "body-presence";
-
-const BATTERY_LVL_NORMAL    = 50;
-const BATTERY_LVL_LOW       = 25;
 
 // Get a handle for each element
 const clock_time        = document.getElementById("clock_time");
 const step_icon         = document.getElementById("step_icon");
 const step_count        = document.getElementById("step_count");
-const batt_icon         = document.getElementById("batt_icon");
-const batt_bar          = document.getElementById("batt_bar");
-const batt_bar_shine    = document.getElementById("batt_bar_shine");
-const batt_percent      = document.getElementById("batt_percent");
 const heart_rate        = document.getElementById("heart_rate");
+
+let batt_icon = new BatteryIcon();
 
 let hrm;
 
@@ -101,9 +96,6 @@ clock.ontick = (evt) =>
     // Display Time
     clock_time.text = `${hours}:${mins}`;
 
-    // Update Battery Bar
-    battery.onchange(charger, evt);
-
     // Update Steps
     let steps = getSteps();
     step_count.text = `${steps}`;
@@ -113,23 +105,7 @@ clock.ontick = (evt) =>
 battery.onchange = (charger, evt) => 
 {
     // Update Battery Bar
-    batt_bar.width = (battery.chargeLevel / 4);
-
-    if (battery.chargeLevel >= BATTERY_LVL_NORMAL)
-    {
-        batt_bar.style.fill = "lightgreen";
-    }
-    else if (battery.chargeLevel < BATTERY_LVL_NORMAL 
-        &&   battery.chargeLevel >= BATTERY_LVL_LOW)
-    {
-        batt_bar.style.fill = "lightsalmon";
-    }
-    else if (battery.chargeLevel < BATTERY_LVL_LOW)
-    {
-        batt_bar.style.fill = "red";
-    }
-
-    batt_percent.text = `${battery.chargeLevel}%`;
+    batt_icon.update();
 }
 
 // Get the current Step Count
